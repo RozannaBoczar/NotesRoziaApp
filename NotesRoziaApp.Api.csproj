@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>1010f430-c532-4999-b773-1e06961f7ebf</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>.</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="NotesApp.Api\NotesApp.Api.csproj" />
+    <None Include="NotesApp.Application\NotesApp.Application.csproj" />
+    <None Include="NotesApp.Domain\NotesApp.Domain.csproj" />
+    <None Include="NotesApp.Infrastructure\NotesApp.Infrastructure.csproj" />
+    <None Include="NotesApp.IntegrationTests\NotesApp.IntegrationTests.csproj" />
+    <None Include="NotesApp.UnitTests\NotesApp.UnitTests.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.10" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
+  </ItemGroup>
+
+</Project>
