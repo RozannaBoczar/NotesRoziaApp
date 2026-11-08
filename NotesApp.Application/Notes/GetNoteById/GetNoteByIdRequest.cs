@@ -1,3 +1,3 @@
 namespace NotesApp.Application.Notes.GetNoteById;
 
-public sealed record GetNoteByIdRequest(int Id);
+public sealed record GetNoteByIdRequest(Guid Id);

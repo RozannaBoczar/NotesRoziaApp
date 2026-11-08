@@ -1,3 +1,3 @@
 namespace NotesApp.Application.Notes.UpdateNote;
 
-public sealed record UpdateNoteRequest(int Id, string Title, string Content);
+public sealed record UpdateNoteRequest(Guid Id, string Title, string Content);

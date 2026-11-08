@@ -1,3 +1,3 @@
 namespace NotesApp.Application.Notes.DeleteNote;
 
-public sealed record DeleteNoteRequest(int Id);
+public sealed record DeleteNoteRequest(Guid Id);
