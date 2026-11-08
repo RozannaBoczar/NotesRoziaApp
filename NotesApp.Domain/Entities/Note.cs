@@ -2,7 +2,7 @@ namespace NotesApp.Domain.Entities;
 
 public sealed class Note
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public string Title { get; set; } = string.Empty;
 
