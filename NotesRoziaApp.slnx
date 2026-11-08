@@ -1,3 +1,8 @@
 <Solution>
-  <Project Path="NotesRoziaApp.Api.csproj" />
+  <Project Path="NotesApp.Api\NotesApp.Api.csproj" />
+  <Project Path="NotesApp.Application\NotesApp.Application.csproj" />
+  <Project Path="NotesApp.Domain\NotesApp.Domain.csproj" />
+  <Project Path="NotesApp.Infrastructure\NotesApp.Infrastructure.csproj" />
+  <Project Path="NotesApp.UnitTests\NotesApp.UnitTests.csproj" />
+  <Project Path="NotesApp.IntegrationTests\NotesApp.IntegrationTests.csproj" />
 </Solution>
