@@ -1,5 +1,6 @@
 # Copilot Instructions
 
-## Wytyczne projektu
-- Preferuje używanie istniejącego rozwiązania z repozytorium zamiast tworzenia nowego; w tym projekcie rozwiązanie ma nazywać się NotesRoziaApp.
-- Gdy użytkownik wskazuje, że plik istnieje, należy ponownie zweryfikować stan repozytorium bez zakładania, że wcześniejsze wyszukiwanie było kompletne.
+## General Guidelines
+- Prefer using existing solutions from the repository instead of creating new ones; in this project, the solution is called NotesRoziaApp.
+- When a user indicates that a file exists, recheck the repository state without assuming that previous searches were complete.
+- Documentation files in Markdown, particularly README and project instruction files, should be written in English.
