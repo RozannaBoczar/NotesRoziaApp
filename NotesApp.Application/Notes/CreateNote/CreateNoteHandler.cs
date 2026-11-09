@@ -5,7 +5,7 @@ namespace NotesApp.Application.Notes.CreateNote;
 
 public sealed class CreateNoteHandler(INoteRepository repository)
 {
-    public Task HandleAsync(CreateNoteRequest request, CancellationToken cancellationToken = default)
+    public Task<Note> HandleAsync(CreateNoteRequest request, CancellationToken cancellationToken = default)
     {
         var now = DateTime.UtcNow;
         var note = new Note

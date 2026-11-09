@@ -16,10 +16,11 @@ namespace NotesApp.Infrastructure.Persistence
             _context = context;
         }
 
-        public async Task CreateAsync(Note note, CancellationToken cancellationToken = default)
+        public async Task<Note> CreateAsync(Note note, CancellationToken cancellationToken = default)
         {
             await _context.Notes.AddAsync(note, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
+            return note;
         }
 
         public async Task<IReadOnlyList<Note>> GetAllAsync(CancellationToken cancellationToken = default)
