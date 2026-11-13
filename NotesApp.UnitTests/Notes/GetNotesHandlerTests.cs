@@ -1,32 +1,39 @@
-﻿using Moq;
+﻿using Bogus;
+using Moq;
 using NotesApp.Application.Abstractions;
 using NotesApp.Application.Notes.GetNotes;
 using NotesApp.Domain.Entities;
 using NotesApp.UnitTests.TestData;
-using System.Reflection.Metadata;
 using Xunit;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace NotesApp.UnitTests.Notes
 {
     public class GetNotesHandlerTests
     {
+        private readonly Mock<INoteRepository> _noteRepositoryMock;
+        private readonly GetNotesHandler _handler;
+        private readonly Faker _faker;
+
+        public GetNotesHandlerTests()
+        {
+            _noteRepositoryMock = new Mock<INoteRepository>();
+            _handler = new GetNotesHandler(_noteRepositoryMock.Object);
+            _faker = new Faker();
+
+        }
         [Fact]
         public async Task HandleAsync_ShouldReturnAllNotes()
         {
             //arrange
-            var repositoryMock = new Mock<INoteRepository>();
             var notesList = NoteFaker.Generate(10);
 
-            repositoryMock
+            _noteRepositoryMock
             .Setup(x => x.GetAllAsync(
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(notesList);
 
-            var handler = new GetNotesHandler(repositoryMock.Object);
-
             //act
-            var response = await handler.HandleAsync();
+            var response = await _handler.HandleAsync();
 
             //assert
             Assert.NotNull(response);
@@ -40,7 +47,7 @@ namespace NotesApp.UnitTests.Notes
                 Assert.NotEqual(default, note.UpdatedAt);
             });
 
-            repositoryMock.Verify(
+            _noteRepositoryMock.Verify(
                 x => x.GetAllAsync(It.IsAny<CancellationToken>()),
                 Times.Once);
         }
@@ -49,24 +56,21 @@ namespace NotesApp.UnitTests.Notes
         public async Task HandleAsync_ShouldReturnEmptyList_WhenNoNotes()
         {
             //arrange
-            var repositoryMock = new Mock<INoteRepository>();
             var notesList = new List<Note>();
 
-            repositoryMock
+            _noteRepositoryMock
             .Setup(x => x.GetAllAsync(
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(notesList);
 
-            var handler = new GetNotesHandler(repositoryMock.Object);
-
             //act
-            var response = await handler.HandleAsync();
+            var response = await _handler.HandleAsync();
 
             //assert
             Assert.NotNull(response);
             Assert.Empty(response);
 
-            repositoryMock.Verify(
+            _noteRepositoryMock.Verify(
                 x => x.GetAllAsync(It.IsAny<CancellationToken>()),
                 Times.Once);
         }
@@ -75,21 +79,18 @@ namespace NotesApp.UnitTests.Notes
         public async Task HandleAsync_ShouldReturnError()
         {
             //arrange
-            var repositoryMock = new Mock<INoteRepository>();
-            repositoryMock
+            _noteRepositoryMock
             .Setup(x => x.GetAllAsync(
                 It.IsAny<CancellationToken>()))
             .ThrowsAsync(new Exception("Database connection failed"));
 
-            var handler = new GetNotesHandler(repositoryMock.Object);
-
             //act
-            var exception = await Assert.ThrowsAsync<Exception>(() => handler.HandleAsync());
+            var exception = await Assert.ThrowsAsync<Exception>(() => _handler.HandleAsync());
 
             //assert
             Assert.Equal("Database connection failed", exception.Message);
 
-            repositoryMock.Verify(
+            _noteRepositoryMock.Verify(
                 x => x.GetAllAsync(It.IsAny<CancellationToken>()),
                 Times.Once);
         }
