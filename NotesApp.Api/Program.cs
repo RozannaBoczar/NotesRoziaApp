@@ -9,6 +9,16 @@ using NotesApp.Application.Notes.DeleteNote;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -25,6 +35,7 @@ builder.Services.AddDbContext<NotesDbContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
+app.UseCors("AllowReactApp");
 app.MapControllers();
 
 if (app.Environment.IsDevelopment())

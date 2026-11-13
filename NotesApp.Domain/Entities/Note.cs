@@ -2,7 +2,7 @@ namespace NotesApp.Domain.Entities;
 
 public sealed class Note
 {
-    public Guid Id { get; set; }
+    public Guid? Id { get; set; }
 
     public string Title { get; set; } = string.Empty;
 
@@ -10,5 +10,5 @@ public sealed class Note
 
     public DateTime CreatedAt { get; set; }
 
-    public DateTime UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 }
